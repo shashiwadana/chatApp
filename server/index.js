@@ -9,12 +9,16 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-io.on('connection', (socket) => {
+io.on('connect', (socket) => {
     console.log('We have a new connection !!!');
 
-    Socket.on('disconnect',() => {
+    socket.on('join',({name,room}) => {
+        console.log(name , room);
+    });
+
+    socket.on('disconnect',() => {
         console.log('User had left!!!')
-    })
+    });
 
 });
 
